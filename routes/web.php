@@ -27,4 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::get('kelola-produk', function () {
         return view('admin.kelola_produk');
     })->name('kelola.produk');
+
+    Route::get('katalog', function () {
+        return view('user.katalog');
+    })->name('katalog');
 });

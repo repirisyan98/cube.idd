@@ -43,7 +43,8 @@
                                     <td>{{ $item->nama_produk }}</td>
                                     <td>{{ $item->kategori->nama }}</td>
                                     <td>{{ $item->stok }}</td>
-                                    <td></td>
+                                    <td><img src="{{ asset('storage/product/' . $item->gambar) }}"
+                                            style="width: 100px;height: 100px" alt="" srcset=""></td>
                                     <td>
                                         <button wire:click='edit("{{ $item->id }}")' data-bs-toggle="modal"
                                             data-bs-target="#modalUbah" class="btn btn-warning"><i
@@ -111,12 +112,13 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <input required class="form-control @error('discount') is-invalid @enderror" type="number"
                                 wire:model.defer='discount' placeholder="Diskon" aria-label="discount">
                             @error('discount')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
                         <div class="mb-3">
                             <input required class="form-control @error('stok') is-invalid @enderror" type="number"
@@ -126,18 +128,22 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <input required class="form-control @error('harga') is-invalid @enderror" type="number"
-                                wire:model.defer='harga' placeholder="Harga" aria-label="harga">
-                            @error('harga')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
+                            <div class="input-group mb-3">
+                                <input required class="form-control @error('harga') is-invalid @enderror" type="number"
+                                    wire:model.defer='harga' placeholder="Harga" aria-label="harga">
+                                @error('harga')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <span class="input-group-text" id="basic-addon2">Rp</span>
+                            </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <input required class="form-control @error('berat') is-invalid @enderror" type="number"
                                 wire:model.defer='berat' placeholder="Berat" aria-label="berat">
                             @error('berat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <span class="input-group-text" id="basic-addon2">Gram</span>
                         </div>
                         <div class="mb-3">
                             <input required class="form-control @error('gambar') is-invalid @enderror" type="file"
@@ -197,13 +203,14 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <input required class="form-control @error('discount') is-invalid @enderror"
                                 type="number" wire:model.defer='discount' placeholder="Diskon"
                                 aria-label="discount">
                             @error('discount')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <span class="input-group-text" id="basic-addon2">%</span>
                         </div>
                         <div class="mb-3">
                             <input required class="form-control @error('stok') is-invalid @enderror" type="number"
@@ -212,23 +219,25 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <input required class="form-control @error('harga') is-invalid @enderror" type="number"
                                 wire:model.defer='harga' placeholder="Harga" aria-label="harga">
                             @error('harga')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <span class="input-group-text" id="basic-addon2">Rp</span>
                         </div>
-                        <div class="mb-3">
+                        <div class="input-group mb-3">
                             <input required class="form-control @error('berat') is-invalid @enderror" type="number"
                                 wire:model.defer='berat' placeholder="Berat" aria-label="berat">
                             @error('berat')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                            <span class="input-group-text" id="basic-addon2">Gram</span>
                         </div>
                         <div class="mb-3">
-                            <input required class="form-control @error('new_pict') is-invalid @enderror"
-                                type="file" wire:model.defer='new_pict'aria-label="new_pict">
+                            <input class="form-control @error('new_pict') is-invalid @enderror" type="file"
+                                wire:model.defer='new_pict'aria-label="new_pict">
                             @error('new_pict')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

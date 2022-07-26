@@ -47,7 +47,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{{ route('katalog') }}">
                 <div class="parent-icon"><i class='bx bx-box'></i>
                 </div>
                 <div class="menu-title">Katalog</div>
