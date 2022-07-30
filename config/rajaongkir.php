@@ -4,7 +4,7 @@ return [
     /*
      * Get your API Key from rajaongkir.com by registering your account
      */
-    'api_key' => env('RAJAONGKIR_API_KEY', 'e55aa5e5dccabb59c6701ff3b5c9b90d'),
+    'api_key' => env('RAJAONGKIR_API_KEY', ''),
 
     /*
      * Set your account package type
