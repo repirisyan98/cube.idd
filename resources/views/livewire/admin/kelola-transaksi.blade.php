@@ -2,7 +2,7 @@
     {{-- Success is as dangerous as failure. --}}
     <div class="card">
         <div class="card-header">
-            <div class="row">
+            <div class="row float-end">
                 <div class="col">
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" wire:model.lazy='search' type="search"

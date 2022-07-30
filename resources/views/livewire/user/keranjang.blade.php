@@ -1,7 +1,9 @@
 <div wire:init='loadPosts'>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     @if (empty($data))
-        <span class="text-center spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <div class="text-center">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </div>
     @else
         @php
             $berat1 = 0;
@@ -66,7 +68,7 @@
                         $no++;
                     @endphp
                 @empty
-                    <div class="text-center">
+                    <div class="text-center mt-5">
                         <h5>Wah, Keranjang belanjaanmu kosong</h5>
                         <br>
                         <p class="text-muted">Yuk, isi dengan barang-barang impianmu!</p>

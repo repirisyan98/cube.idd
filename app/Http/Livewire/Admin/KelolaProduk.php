@@ -23,12 +23,13 @@ class KelolaProduk extends Component
         'canceled',
     ];
 
-    public $readyToLoad, $edit_ukuran, $ukuran, $temp_id, $nama_produk, $kategori_id, $keterangan, $discount, $stok, $harga, $berat, $gambar, $new_pict;
+    public $readyToLoad, $search, $edit_ukuran, $ukuran, $temp_id, $nama_produk, $kategori_id, $keterangan, $discount, $stok, $harga, $berat, $gambar, $new_pict;
     public $inputs = [];
     public $ukurans = [];
     public $i = -1;
     public function mount()
     {
+        $this->search = '';
         $this->readyToLoad = false;
     }
 
@@ -45,7 +46,9 @@ class KelolaProduk extends Component
     public function render()
     {
         return view('livewire.admin.kelola-produk', [
-            'data' => $this->readyToLoad ? Produk::with('kategori')->simplePaginate(15) : [],
+            'data' => $this->readyToLoad ? Produk::with('kategori')->when($this->search != null, function ($query) {
+                return $query->where('nama_produk', 'like', '%' . $this->search . '%');
+            })->simplePaginate(15) : [],
             'kategori' => $this->readyToLoad ? Kategori::all() : []
         ]);
     }
@@ -66,7 +69,7 @@ class KelolaProduk extends Component
             'ukurans' => 'required'
         ]);
         $extension = $this->gambar->extension();
-        $filename = now() . '.' . $extension;
+        $filename = date('Y-m-d-H_i_s') . '.' . $extension;
         try {
             Produk::create([
                 'nama_produk' => $this->nama_produk,
@@ -120,7 +123,7 @@ class KelolaProduk extends Component
             if ($this->new_pict != null) {
                 Storage::delete('public/product/' . $this->gambar);
                 $extension = $this->new_pict->extension();
-                $filename = now() . '.' . $extension;
+                $filename = date('Y-m-d-H_i_s') . '.' . $extension;
                 $this->new_pict->storeAs('public/product', $filename);
                 $this->gambar = $filename;
             }

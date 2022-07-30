@@ -19,11 +19,12 @@ class KelolaKategori extends Component
         'canceled',
     ];
 
-    public $readyToLoad, $temp_id, $nama, $deskripsi;
+    public $readyToLoad, $temp_id, $nama, $deskripsi, $search;
 
     public function mount()
     {
         $this->readyToLoad = false;
+        $this->search = '';
     }
 
     public function loadPosts()
@@ -39,7 +40,9 @@ class KelolaKategori extends Component
     public function render()
     {
         return view('livewire.admin.kelola-kategori', [
-            'data' => $this->readyToLoad ? Kategori::simplePaginate(15) : [],
+            'data' => $this->readyToLoad ? Kategori::when($this->search != null, function ($query) {
+                return $query->where('nama', 'like', '%' . $this->search . '%');
+            })->simplePaginate(15) : [],
         ]);
     }
 

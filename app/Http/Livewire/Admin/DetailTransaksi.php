@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin;
 
 use App\Models\DetailPemesanan;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
@@ -10,7 +11,7 @@ class DetailTransaksi extends Component
 {
     use LivewireAlert;
 
-    public $readyToLoad, $pemesanan_id, $temp_id, $resi;
+    public $readyToLoad, $pemesanan_id, $temp_id, $search, $resi;
 
     protected $listeners = [
         'procced',
@@ -21,6 +22,7 @@ class DetailTransaksi extends Component
     {
         $this->readyToLoad = false;
         $this->pemesanan_id = $id;
+        $this->search = '';
     }
 
     public function loadPosts()
@@ -36,7 +38,11 @@ class DetailTransaksi extends Component
     public function render()
     {
         return view('livewire.admin.detail-transaksi', [
-            'data' => $this->readyToLoad ? DetailPemesanan::with('produk')->where('pemesanan_id', $this->pemesanan_id)->get() : [],
+            'data' => $this->readyToLoad ? DetailPemesanan::with('produk')->when($this->search != null, function ($query) {
+                return $query->whereHas('produk', function (Builder $query) {
+                    $query->where('nama_produk', 'like', '%' . $this->search . '%');
+                });
+            })->where('pemesanan_id', $this->pemesanan_id)->get() : [],
         ]);
     }
 

@@ -1,16 +1,6 @@
 <div wire:init='loadPosts'>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="card">
-        <div class="card-header">
-            <div class="row">
-                <div class="col">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" wire:model.lazy='search' type="search"
-                            placeholder="Cari Produk..." aria-label="Search">
-                    </form>
-                </div>
-            </div>
-        </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table align-middle mb-0">

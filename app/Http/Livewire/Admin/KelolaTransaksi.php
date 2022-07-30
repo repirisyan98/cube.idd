@@ -13,7 +13,7 @@ class KelolaTransaksi extends Component
     use WithPagination;
     use LivewireAlert;
 
-    public $readyToLoad, $pembeli;
+    public $readyToLoad, $pembeli, $search;
 
     public function mount()
     {
@@ -32,7 +32,9 @@ class KelolaTransaksi extends Component
     public function render()
     {
         return view('livewire.admin.kelola-transaksi', [
-            'data' => $this->readyToLoad ? Pemesanan::where('status', "1")->simplePaginate(15) : []
+            'data' => $this->readyToLoad ? Pemesanan::when($this->search != null, function ($query) {
+                return $query->where('invoice', 'like', '%' . $this->search . '%');
+            })->where('status', "1")->simplePaginate(15) : []
         ]);
     }
 

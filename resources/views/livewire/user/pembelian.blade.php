@@ -5,7 +5,9 @@
             <i class="bx bx-bell"></i></button>
     @endif
     @if (empty($data))
-        <span class="text-center spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <div class="text-center">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </div>
     @else
         <div class="row">
             @forelse ($data as $item)
@@ -22,7 +24,7 @@
                                 @php
                                     $harga = $item->produk->harga - ($item->produk->harga * $item->produk->discount) / 100;
                                 @endphp
-                                <p>{{ $item->produk->nama_produk }}</p>
+                                <h5>{{ $item->produk->nama_produk }}</h5>
                                 <p><b>Qty : {{ $item->qty }}</b></p>
                                 <p><b>Total Pembayaran : Rp.{{ number_format($harga * $item->qty, 0, ',', '.') }}</b>
                                 </p>

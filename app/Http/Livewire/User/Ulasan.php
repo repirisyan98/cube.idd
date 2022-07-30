@@ -4,8 +4,6 @@ namespace App\Http\Livewire\User;
 
 use App\Models\DetailPemesanan;
 use App\Models\Ulasan as ModelsUlasan;
-use Illuminate\Contracts\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -53,7 +51,7 @@ class Ulasan extends Component
                 'foto' => 'required|image',
             ]);
             $extension = $this->foto->extension();
-            $filename = now() . '.' . $extension;
+            $filename = date('Y-m-d-H_i_s') . '.' . $extension;
             ModelsUlasan::create([
                 'produk_id' => $this->produk_id,
                 'user_id' => auth()->user()->id,
