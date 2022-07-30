@@ -15,8 +15,9 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-
-                            {{ __('You are logged in!') }}
+                            <img class="img-fluid" src="{{ asset('assets/images/dashboard.png') }}" alt=""
+                                srcset="">
+                            {{-- {{ __('You are logged in!') }} --}}
                         </div>
                     </div>
                 </div>

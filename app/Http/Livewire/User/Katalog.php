@@ -22,12 +22,13 @@ class Katalog extends Component
         'canceled',
     ];
 
-    public $readyToLoad, $page_number;
+    public $readyToLoad, $paginateLimit, $search;
 
     public function mount()
     {
         $this->readyToLoad = false;
-        $this->page_number = 15;
+        $this->paginateLimit = 15;
+        $this->search = '';
     }
 
     public function loadPosts()
@@ -42,18 +43,17 @@ class Katalog extends Component
 
     public function render()
     {
-        // $kategori_id = null;
-        // $produk_id = DetailPemesanan::with(['pemesanan', 'produk'])->whereIn('status', ["3", "4"])->whereHas('pemesanan', function ($query) {
-        //     $query->where('user_id', auth()->user()->id);
-        // })->whereHas('produk', function ($query) {
-        //     $query->select('id')->groupBy('kategori_id');
-        // })->get();
-
-        // dd($produk_id);
+        $produk_id = DetailPemesanan::whereHas('pemesanan', function ($query) {
+            return $query->where('user_id', auth()->user()->id);
+        })->latest()->value('produk_id');
+        $kategori_id = Produk::where('id', $produk_id)->value('kategori_id');
         return view('livewire.user.katalog', [
             'data' => $this->readyToLoad ? Produk::with('detail_pemesanan')->orWhereHas('detail_pemesanan', function (Builder $query) {
                 return $query->selectRaw('COUNT(*) as terjual');
-            })->where('stok', '>', 0)->simplePaginate($this->page_number) : [],
+            })->when($this->search != null, function ($query) {
+                return $query->where('nama_produk', 'like', '%' . $this->search . '%');
+            })->where('stok', '>', 0)->simplePaginate($this->paginateLimit) : [],
+            'rekomendasi' => $this->readyToLoad ? Produk::with('detail_pemesanan')->where('stok', '>', 0)->where('kategori_id', $kategori_id)->limit(4)->get() : [],
         ]);
     }
 }

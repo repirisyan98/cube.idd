@@ -1,5 +1,15 @@
+@php
+$themeClass = '';
+if (!empty($_COOKIE['theme'])) {
+    if ($_COOKIE['theme'] == 'dark-theme') {
+        $themeClass = 'dark-theme';
+    } else {
+        $themeClass = 'light-theme';
+    }
+}
+@endphp
 <!doctype html>
-<html lang="en">
+<html lang="id" class="{{ $themeClass }}">
 
 <head>
     <!-- Required meta tags -->
@@ -62,6 +72,12 @@
     <script src="{{ asset('assets/js/app.js') }}"></script>
     @livewireScripts
     @yield('script')
+    @if (!empty($_COOKIE['theme']))
+        @if ($_COOKIE['theme'] == 'dark-theme')
+            <link id="alert-dark" rel="stylesheet" href="{{ asset('assets/css/sweet_alert_dark.css') }}"
+                rel="stylesheet">
+        @endif
+    @endif
     <script src="{{ asset('assets/plugins/sweetalert/sweetalert2.all.min.js') }}"></script>
     <x-livewire-alert::scripts />
 </body>

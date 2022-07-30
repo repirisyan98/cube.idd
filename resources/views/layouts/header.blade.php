@@ -5,6 +5,16 @@
             <div class="mobile-toggle-menu"><i class='bx bx-menu'></i>
             </div>
             <div class="top-menu ms-auto">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                {{ $themeClass == 'dark-theme' ? 'checked' : '' }} id="mode">
+                            <label class="form-check-label" for="flexSwitchCheckChecked"></label>
+                            <i id="mode-icon" class="bx bx-{{ $themeClass == 'dark-theme' ? 'moon' : 'sun' }}"></i>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#"
