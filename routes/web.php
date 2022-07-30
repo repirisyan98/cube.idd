@@ -37,7 +37,9 @@ Route::group(['middleware' => 'verified'], function () {
             return view('admin.detail_transaksi', ['id' => $id]);
         })->name('detail.transaksi');
     });
-
+    Route::get('profile', function () {
+        return view('profile');
+    })->name('profile');
     Route::middleware('is_user')->group(function () {
         Route::get('katalog', function () {
             return view('user.katalog');
