@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->enum('rating', [1, 2, 3, 4, 5]);
             $table->string('picture');
+            $table->text('keterangan');
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedInteger('stok');
             $table->unsignedInteger('harga');
             $table->unsignedFloat('berat');
+            $table->json('ukuran');
             $table->string('gambar');
             $table->timestamps();
         });

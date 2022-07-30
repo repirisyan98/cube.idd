@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -37,6 +37,11 @@ class User extends Authenticatable
     public function keranjang()
     {
         return $this->hasMany(Keranjang::class);
+    }
+
+    public function rajaongkir_citie()
+    {
+        return $this->belongsTo(RajaongkirCitie::class);
     }
 
     /**

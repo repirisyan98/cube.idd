@@ -18,6 +18,9 @@ return new class extends Migration
             $table->foreignId('produk_id')->constrained();
             $table->foreignId('pemesanan_id')->constrained();
             $table->unsignedInteger('qty');
+            $table->enum('status', [0, 1, 2, 3, 4, 5]); // 0 = Menunggu Konfirmasi, 1 = DiProses, 2 = Dikirim, 3 = Selesai , 4 = Ulasan, 5 Gagal;
+            $table->string('keterangan')->nullable();
+            $table->string('no_resi')->nullable();
             $table->timestamps();
         });
     }

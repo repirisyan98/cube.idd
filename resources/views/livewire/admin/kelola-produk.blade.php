@@ -106,6 +106,24 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" wire:model='ukuran'
+                                    placeholder="Masukkan Keterangan Ukuran" aria-label="Recipient's username"
+                                    aria-describedby="button-addon2">
+                                <button class="btn btn-outline-secondary" wire:click="add({{ $i }})"
+                                    type="button" id="button-addon2">+</button>
+                            </div>
+                            @foreach ($inputs as $key => $value)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" wire:model.defer='ukurans.{{ $value }}'
+                                        type="checkbox" checked>
+                                    <label class="form-check-label">
+                                        {{ $ukurans[$value] }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="mb-3">
                             <textarea class="form-control @error('keterangan') is-invalid @enderror" cols="30" rows="10" required
                                 wire:model.defer='keterangan'></textarea>
                             @error('keterangan')
@@ -129,8 +147,8 @@
                         </div>
                         <div class="mb-3">
                             <div class="input-group mb-3">
-                                <input required class="form-control @error('harga') is-invalid @enderror" type="number"
-                                    wire:model.defer='harga' placeholder="Harga" aria-label="harga">
+                                <input required class="form-control @error('harga') is-invalid @enderror"
+                                    type="number" wire:model.defer='harga' placeholder="Harga" aria-label="harga">
                                 @error('harga')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -202,6 +220,22 @@
                             @error('keterangan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Ukuran</label>
+                            <br>
+                            @if ($edit_ukuran != null)
+                                @foreach ($edit_ukuran as $key => $value)
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input"
+                                            wire:model.defer='edit_ukuran.{{ $key }}' type="checkbox"
+                                            checked>
+                                        <label class="form-check-label">
+                                            {{ $value }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="input-group mb-3">
                             <input required class="form-control @error('discount') is-invalid @enderror"

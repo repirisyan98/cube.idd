@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('pemesanans', function (Blueprint $table) {
             $table->id();
+            $table->string('invoice')->unique();
             $table->foreignId('user_id')->constrained();
             $table->date('tanggal');
             $table->text('alamat');
             $table->unsignedInteger('ongkir');
-            $table->string('no_resi');
-            $table->enum('status', [0, 1, 2, 3, 4]); //0 = Menunggu Konfirmasi 1 = Diproses, 2 = Dikirim, 3 = Selesai, 4 = diBatalkan
+            $table->string('kurir');
+            $table->enum('status', [0, 1, 2, 3]); //0 = Menunggu Pembayaran, 1 = Pembayaran Berhasil 2 = Selesai, 3 = Gagal
             $table->unsignedInteger('total_pembayaran');
-            $table->string('nomor_resi')->unique();
+            $table->string('snap_token')->nullable()->unique();
             $table->timestamps();
         });
     }

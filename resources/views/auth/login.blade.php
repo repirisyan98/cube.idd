@@ -14,7 +14,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header text-center">
+                        <img style="width: 300px;height:300px" src="{{ asset('assets/images/Cube.idd.jpg') }}"
+                            alt="" srcset="">
+                    </div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -72,6 +75,9 @@
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Login') }}
                                     </button>
+                                    <a href="{{ route('register') }}" class="btn btn-primary">
+                                        {{ __('Register') }}
+                                    </a>
 
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">

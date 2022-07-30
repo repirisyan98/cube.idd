@@ -23,8 +23,10 @@ class KelolaProduk extends Component
         'canceled',
     ];
 
-    public $readyToLoad, $temp_id, $nama_produk, $kategori_id, $keterangan, $discount, $stok, $harga, $berat, $gambar, $new_pict;
-
+    public $readyToLoad, $edit_ukuran, $ukuran, $temp_id, $nama_produk, $kategori_id, $keterangan, $discount, $stok, $harga, $berat, $gambar, $new_pict;
+    public $inputs = [];
+    public $ukurans = [];
+    public $i = -1;
     public function mount()
     {
         $this->readyToLoad = false;
@@ -48,14 +50,23 @@ class KelolaProduk extends Component
         ]);
     }
 
+    public function add($i)
+    {
+        $i = $i + 1;
+        $this->i = $i;
+        array_push($this->inputs, $i);
+        array_push($this->ukurans, $this->ukuran);
+        $this->reset('ukuran');
+    }
+
     public function store()
     {
         $this->validate([
             'gambar' => 'required|image',
+            'ukurans' => 'required'
         ]);
         $extension = $this->gambar->extension();
         $filename = now() . '.' . $extension;
-        $this->gambar->storeAs('public/product', $filename);
         try {
             Produk::create([
                 'nama_produk' => $this->nama_produk,
@@ -66,7 +77,9 @@ class KelolaProduk extends Component
                 'harga' => $this->harga,
                 'berat' => $this->berat,
                 'gambar' => $filename,
+                'ukuran' => json_encode($this->ukurans),
             ]);
+            $this->gambar->storeAs('public/product', $filename);
             $this->alert(
                 'success',
                 'Data berhasil disimpan'
@@ -95,6 +108,7 @@ class KelolaProduk extends Component
         $this->harga = $data->harga;
         $this->berat = $data->berat;
         $this->gambar = $data->gambar;
+        $this->edit_ukuran = json_decode($data->ukuran);
     }
 
     public function update()
@@ -119,6 +133,7 @@ class KelolaProduk extends Component
                 'stok' => $this->stok,
                 'berat' => $this->berat,
                 'gambar' => $this->gambar,
+                'ukuran' => json_encode($this->edit_ukuran),
             ]);
             $this->alert(
                 'success',

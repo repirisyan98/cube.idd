@@ -21,7 +21,10 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
             'telefon' => '082736377363',
-            'foto' => 'default.png'
+            'foto' => 'default.png',
+            'rajaongkir_citie_id' => 104,
+            'role' => "1",
+            'email_verified_at' => now(),
         ]);
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('produk_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->unsignedInteger('qty');
+            $table->string('ukuran');
             $table->timestamps();
         });
     }
