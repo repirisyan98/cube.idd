@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'rajaongkir_citie_id' => 104,
             'role' => "1",
             'email_verified_at' => now(),
+            'alamat' => 'Cianjur'
         ]);
     }
 }
