@@ -70,7 +70,7 @@ class Keranjang extends Component
                 $weight = $this->berat,
                 $courier = RajaongkirCourier::JNE
             );
-            $this->ongkir = $data[0]['costs'][1]['cost'][0]['value'];
+            $this->ongkir = $data[0]['costs'][0]['cost'][0]['value'];
         } catch (\Throwable $th) {
             $this->alert(
                 'error',
